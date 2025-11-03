@@ -3,6 +3,7 @@ import { OpeningSlide } from '../components/OpeningSlide.tsx';
 import { BusinessProcessSlide } from '../components/BusinessProcessSlide.tsx';
 import { TechnicalArchitectureSlide } from '../components/TechnicalArchitectureSlide.tsx';
 import { ImplementationPlanSlide } from '../components/ImplementationPlanSlide.tsx';
+import { ClosingSlide } from '../components/ClosingSlide.tsx';
 
 interface SlideConfig {
   id: number;
@@ -31,16 +32,7 @@ const CostEstimateSlide = () => (
   </div>
 );
 
-const ClosingSlide = ({ highlights }: { highlights: string[] }) => (
-  <div className="slide closing-slide">
-    <h2>Key Highlights</h2>
-    <ul>
-      {highlights.map((highlight, index) => (
-        <li key={index}>{highlight}</li>
-      ))}
-    </ul>
-  </div>
-);
+// ClosingSlide is now imported from components
 
 // Slide configuration as per requirements (exactly 5 slides)
 export const slideConfigs: SlideConfig[] = [
@@ -74,10 +66,27 @@ export const slideConfigs: SlideConfig[] = [
     title: 'Cost Estimate',
     component: CostEstimateSlide,
   },
+  {
+    id: 6,
+    title: 'Thank You',
+    component: ClosingSlide,
+    props: {
+      highlights: [
+        'AI-powered conversational interface reduces manual work order processing by 80%',
+        'Seamless integration with existing CMMS systems and field service platforms',
+        'Amazon Connect provides enterprise-grade voice and chat capabilities',
+        'Amazon Lex enables natural language understanding for complex facility requests',
+        'Amazon Bedrock delivers intelligent responses using your knowledge base',
+        'Scalable architecture supports 100 to 10,000+ monthly calls',
+        'Real-time cost optimization with transparent 60-month projections',
+        'Enterprise-ready solution with built-in security and compliance'
+      ],
+    },
+  },
 ];
 
 // Complete presentation configuration
 export const presentationConfig: PresentationConfig = {
   slides: slideConfigs,
-  totalSlides: slideConfigs.length,
+  totalSlides: slideConfigs.length, // Now 6 slides total
 };

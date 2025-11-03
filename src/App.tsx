@@ -1,12 +1,16 @@
 import React from 'react'
 import './styles/App.css'
+import { SlideProvider } from './contexts/SlideContext'
+import { SlideManager } from './components/SlideManager'
+import { slideConfigs, presentationConfig } from './config/slideConfig'
 
 function App() {
   return (
-    <div className="app">
-      <h1>Facility Management Presentation</h1>
-      <p>React app initialized successfully!</p>
-    </div>
+    <SlideProvider totalSlides={presentationConfig.totalSlides}>
+      <div className="app">
+        <SlideManager slides={slideConfigs} className="main-presentation" />
+      </div>
+    </SlideProvider>
   )
 }
 

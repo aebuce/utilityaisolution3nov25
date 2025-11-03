@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 interface SlideState {
@@ -17,6 +17,30 @@ interface SlideContextType {
   canGoPrevious: () => boolean;
 }
 
+// Utility functions for localStorage persistence
+const SLIDE_STORAGE_KEY = 'facility-presentation-current-slide';
+
+const saveCurrentSlide = (slideNumber: number): void => {
+  try {
+    localStorage.setItem(SLIDE_STORAGE_KEY, slideNumber.toString());
+  } catch (error) {
+    console.warn('Failed to save current slide to localStorage:', error);
+  }
+};
+
+const loadCurrentSlide = (): number => {
+  try {
+    const saved = localStorage.getItem(SLIDE_STORAGE_KEY);
+    if (saved) {
+      const slideNumber = parseInt(saved, 10);
+      return isNaN(slideNumber) ? 1 : slideNumber;
+    }
+  } catch (error) {
+    console.warn('Failed to load current slide from localStorage:', error);
+  }
+  return 1;
+};
+
 // Action types for slide state management
 type SlideAction =
   | { type: 'GO_TO_SLIDE'; payload: number }
@@ -26,13 +50,13 @@ type SlideAction =
   | { type: 'SET_DIRECTION'; payload: 'next' | 'prev' | null }
   | { type: 'INITIALIZE'; payload: { totalSlides: number } };
 
-// Initial state
-const initialState: SlideState = {
-  currentSlide: 1,
+// Initial state with persistence
+const getInitialState = (): SlideState => ({
+  currentSlide: loadCurrentSlide(),
   totalSlides: 5, // As per requirements: exactly 5 slides
   isTransitioning: false,
   direction: null,
-};
+});
 
 // Reducer function for slide state management
 function slideReducer(state: SlideState, action: SlideAction): SlideState {
@@ -49,6 +73,8 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       if (targetSlide < 1 || targetSlide > state.totalSlides) {
         return state;
       }
+      // Save to localStorage
+      saveCurrentSlide(targetSlide);
       return {
         ...state,
         currentSlide: targetSlide,
@@ -59,9 +85,12 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       if (state.currentSlide >= state.totalSlides) {
         return state;
       }
+      const nextSlide = state.currentSlide + 1;
+      // Save to localStorage
+      saveCurrentSlide(nextSlide);
       return {
         ...state,
-        currentSlide: state.currentSlide + 1,
+        currentSlide: nextSlide,
         direction: 'next',
         isTransitioning: true,
       };
@@ -71,9 +100,12 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       if (state.currentSlide <= 1) {
         return state;
       }
+      const prevSlide = state.currentSlide - 1;
+      // Save to localStorage
+      saveCurrentSlide(prevSlide);
       return {
         ...state,
-        currentSlide: state.currentSlide - 1,
+        currentSlide: prevSlide,
         direction: 'prev',
         isTransitioning: true,
       };
@@ -106,9 +138,18 @@ interface SlideProviderProps {
 
 export function SlideProvider({ children, totalSlides = 5 }: SlideProviderProps) {
   const [slideState, dispatch] = useReducer(slideReducer, {
-    ...initialState,
+    ...getInitialState(),
     totalSlides,
   });
+
+  // Validate and correct the loaded slide number on mount
+  useEffect(() => {
+    const currentSlide = slideState.currentSlide;
+    if (currentSlide < 1 || currentSlide > totalSlides) {
+      // If loaded slide is invalid, reset to slide 1
+      dispatch({ type: 'GO_TO_SLIDE', payload: 1 });
+    }
+  }, [totalSlides, slideState.currentSlide]);
 
   // Context value with all required functions
   const contextValue: SlideContextType = {

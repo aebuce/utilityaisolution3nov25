@@ -1,5 +1,6 @@
 import React, { ComponentType } from 'react';
 import { useSlideContext } from '../contexts/SlideContext.tsx';
+import { VirtualHighlighter } from './VirtualHighlighter';
 
 interface SlideConfig {
   id: number;
@@ -36,14 +37,16 @@ export function SlideManager({ slides, className = '' }: SlideManagerProps) {
   
   return (
     <div className={`slide-manager ${className}`}>
-      <div 
-        className={`slide-container ${slideState.isTransitioning ? 'transitioning' : ''}`}
-        data-slide-id={slideState.currentSlide}
-        data-slide-title={currentSlideConfig.title}
-        data-direction={slideState.direction}
-      >
-        <SlideComponent {...(currentSlideConfig.props || {})} />
-      </div>
+      <VirtualHighlighter className="slide-highlighter-overlay">
+        <div 
+          className={`slide-container ${slideState.isTransitioning ? 'transitioning' : ''}`}
+          data-slide-id={slideState.currentSlide}
+          data-slide-title={currentSlideConfig.title}
+          data-direction={slideState.direction}
+        >
+          <SlideComponent {...(currentSlideConfig.props || {})} />
+        </div>
+      </VirtualHighlighter>
       
       {/* Slide indicator */}
       <div className="slide-indicator">

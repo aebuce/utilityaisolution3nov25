@@ -1,5 +1,7 @@
 import React, { ComponentType } from 'react';
 import { OpeningSlide } from '../components/OpeningSlide.tsx';
+import { BusinessProcessSlide } from '../components/BusinessProcessSlide.tsx';
+import { TechnicalArchitectureSlide } from '../components/TechnicalArchitectureSlide.tsx';
 
 interface SlideConfig {
   id: number;
@@ -15,19 +17,9 @@ interface PresentationConfig {
 
 // Placeholder slide components (will be implemented in later tasks)
 
-const BusinessProcessSlide = () => (
-  <div className="slide business-process-slide">
-    <h2>Business Process Overview</h2>
-    <p>Mermaid swimlane diagram will be implemented here</p>
-  </div>
-);
+// BusinessProcessSlide is now imported from components
 
-const TechnicalArchitectureSlide = () => (
-  <div className="slide technical-architecture-slide">
-    <h2>AWS Technical Architecture</h2>
-    <p>AWS architecture diagram will be implemented here</p>
-  </div>
-);
+// TechnicalArchitectureSlide is now imported from components
 
 const ImplementationPlanSlide = () => (
   <div className="slide implementation-plan-slide">

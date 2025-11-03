@@ -1,0 +1,299 @@
+/* Technical Architecture Slide Styles */
+.technical-architecture-slide {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.technical-architecture-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.technical-architecture-slide .slide-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+}
+
+.technical-architecture-slide .slide-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.technical-architecture-slide .slide-subtitle {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin: 0;
+  font-weight: 400;
+}
+
+.technical-architecture-slide .diagram-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  min-height: 400px;
+}
+
+.technical-architecture-slide .mermaid-diagram {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.technical-architecture-slide .mermaid-diagram svg {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
+}
+
+/* Loading State */
+.technical-architecture-slide .diagram-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #4a5568;
+}
+
+.technical-architecture-slide .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #3182ce;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.technical-architecture-slide .diagram-loading p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Error State */
+.technical-architecture-slide .diagram-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #e53e3e;
+  padding: 2rem;
+}
+
+.technical-architecture-slide .error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.technical-architecture-slide .diagram-error h3 {
+  color: #e53e3e;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.technical-architecture-slide .error-message {
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.technical-architecture-slide .retry-button {
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 2rem;
+}
+
+.technical-architecture-slide .retry-button:hover {
+  background: #2c5aa0;
+}
+
+.technical-architecture-slide .fallback-content {
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
+}
+
+.technical-architecture-slide .fallback-content h4 {
+  color: #1a365d;
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.technical-architecture-slide .architecture-layers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.technical-architecture-slide .layer {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #3182ce;
+}
+
+.technical-architecture-slide .layer h5 {
+  color: #1a365d;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.technical-architecture-slide .layer ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #4a5568;
+}
+
+.technical-architecture-slide .layer li {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Architecture Highlights */
+.technical-architecture-slide .architecture-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.technical-architecture-slide .highlight-item {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.technical-architecture-slide .highlight-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.technical-architecture-slide .highlight-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a365d;
+  margin: 0 0 0.3rem 0;
+}
+
+.technical-architecture-slide .highlight-content p {
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .technical-architecture-slide {
+    padding: 1rem;
+  }
+  
+  .technical-architecture-slide .slide-title {
+    font-size: 2rem;
+  }
+  
+  .technical-architecture-slide .slide-subtitle {
+    font-size: 1rem;
+  }
+  
+  .technical-architecture-slide .diagram-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 300px;
+  }
+  
+  .technical-architecture-slide .architecture-highlights {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .technical-architecture-slide .highlight-item {
+    padding: 0.75rem;
+  }
+  
+  .technical-architecture-slide .architecture-layers {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .technical-architecture-slide .slide-title {
+    font-size: 1.5rem;
+  }
+  
+  .technical-architecture-slide .slide-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .technical-architecture-slide .diagram-container {
+    min-height: 250px;
+  }
+  
+  .technical-architecture-slide .highlight-content h3 {
+    font-size: 0.9rem;
+  }
+  
+  .technical-architecture-slide .highlight-content p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .technical-architecture-slide {
+    background: white;
+    padding: 1rem;
+  }
+  
+  .technical-architecture-slide .diagram-container {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .technical-architecture-slide .architecture-highlights {
+    page-break-inside: avoid;
+  }
+}

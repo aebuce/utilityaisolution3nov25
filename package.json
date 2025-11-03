@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "vite build --mode production",
     "preview": "vite preview",
+    "preview:dist": "vite preview --port 4173 --host",
+    "test:prod": "node scripts/test-production.js",
     "lint": "echo 'Linting not configured yet'",
     "test": "echo 'Tests not configured yet'"
   },

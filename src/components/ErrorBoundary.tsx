@@ -27,6 +27,30 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error details for debugging
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    
+    // Enhanced logging for production deployment
+    const errorDetails = {
+      error: error.toString(),
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      url: window.location.href,
+      componentName: this.props.componentName
+    };
+    
+    // Log to console for debugging
+    console.error('Production Error Details:', errorDetails);
+    
+    // Store error in sessionStorage for potential debugging
+    try {
+      const existingErrors = JSON.parse(sessionStorage.getItem('app-errors') || '[]');
+      existingErrors.push(errorDetails);
+      sessionStorage.setItem('app-errors', JSON.stringify(existingErrors.slice(-10))); // Keep last 10 errors
+    } catch (storageError) {
+      console.warn('Could not store error in sessionStorage:', storageError);
+    }
+    
     this.setState({
       error,
       errorInfo,

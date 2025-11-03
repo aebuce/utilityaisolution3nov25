@@ -7,11 +7,15 @@ import { NavigationController } from './components/NavigationController'
 import { HighlighterToggle } from './components/HighlighterToggle'
 import { HighlighterManager } from './components/HighlighterManager'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { AppFallback } from './components/AppFallback'
 import { slideConfigs, presentationConfig } from './config/slideConfig'
 
 function App() {
   return (
-    <ErrorBoundary componentName="Presentation Application">
+    <ErrorBoundary 
+      componentName="Presentation Application"
+      fallback={<AppFallback />}
+    >
       <SlideProvider totalSlides={presentationConfig.totalSlides}>
         <HighlighterProvider>
           <div className="app presentation-app">

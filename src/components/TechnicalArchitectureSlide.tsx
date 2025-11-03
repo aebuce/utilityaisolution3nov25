@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
+import { AWSArchitectureDiagram } from './AWSArchitectureDiagram';
 import '../styles/TechnicalArchitectureSlide.css';
 
 interface TechnicalArchitectureSlideProps {
@@ -11,82 +12,67 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
   const [diagramError, setDiagramError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [useStaticDiagram, setUseStaticDiagram] = useState(true);
 
-  // AWS architecture diagram as per design document
+  // AWS architecture diagram with proper AWS styling and larger components
   const defaultDiagram = `graph TB
-    subgraph "Customer Channels"
-        A[Phone/PSTN]
-        B[Web Chat]
-        C[Web Voice]
+    subgraph "Customer Channels" 
+        A["📞 Phone/PSTN<br/>Traditional Voice Calls"]
+        B["💬 Web Chat<br/>Browser-based Chat"]
+        C["🎤 Web Voice<br/>WebRTC Voice Calls"]
     end
     
-    subgraph "AWS Contact Center"
-        D[Amazon Connect<br/>Contact Center]
-        E[Amazon Lex<br/>Conversational AI]
+    subgraph "AWS Contact Center Services"
+        D["🔗 Amazon Connect<br/>Cloud Contact Center<br/>Call Routing & Management"]
+        E["🤖 Amazon Lex<br/>Conversational AI<br/>Natural Language Processing"]
     end
     
-    subgraph "AWS AI Services"
-        F[Bedrock Knowledge Base<br/>FAQ & Documentation]
-        G[Bedrock Agents<br/>Work Order Processing]
+    subgraph "AWS AI & ML Services"
+        F["📚 Amazon Bedrock<br/>Knowledge Base<br/>FAQ & Documentation Search"]
+        G["🧠 Amazon Bedrock<br/>Agents<br/>Intelligent Work Order Processing"]
     end
     
-    subgraph "Backend Integration"
-        H[CMMS System 1<br/>ServiceNow]
-        I[CMMS System 2<br/>Maximo]
-        J[Field Service Dispatch<br/>FieldAware]
-        K[Partner APIs<br/>Contractor Network]
+    subgraph "Backend Integration Layer"
+        H["🏢 ServiceNow CMMS<br/>Enterprise Service Management<br/>Incident & Change Management"]
+        I["⚙️ IBM Maximo<br/>Asset Management<br/>Maintenance Planning"]
+        J["🚚 FieldAware<br/>Field Service Dispatch<br/>Technician Scheduling"]
+        K["🔌 Partner APIs<br/>Contractor Network<br/>External Service Providers"]
     end
     
-    subgraph "Data Flow"
-        L[Call Routing & Recording]
-        M[Intent Classification]
-        N[Knowledge Retrieval]
-        O[Work Order Creation]
-        P[Status Updates]
-    end
+    %% Main flow connections with labels
+    A -->|"Voice Call"| D
+    B -->|"Chat Message"| D
+    C -->|"Web Voice"| D
     
-    %% Customer to AWS Connect
-    A --> D
-    B --> D
-    C --> D
+    D -->|"Route to AI"| E
+    E -->|"FAQ Query"| F
+    E -->|"Work Order Request"| G
     
-    %% Connect to Lex
-    D --> E
-    D --> L
+    F -->|"Knowledge Response"| E
+    G -->|"Create Ticket"| H
+    G -->|"Asset Request"| I
     
-    %% Lex to Bedrock Services
-    E --> F
-    E --> G
-    E --> M
+    H -->|"Dispatch Request"| J
+    I -->|"Maintenance Order"| J
+    J -->|"Partner Assignment"| K
     
-    %% Bedrock to Backend Systems
-    F --> N
-    G --> H
-    G --> I
-    G --> O
+    %% Return flow
+    K -->|"Status Update"| J
+    J -->|"Completion Status"| H
+    J -->|"Completion Status"| I
+    H -->|"Customer Update"| D
+    I -->|"Customer Update"| D
     
-    %% Backend to Field Services
-    H --> J
-    I --> J
-    J --> K
-    
-    %% Status Updates Flow
-    J --> P
-    K --> P
-    P --> D
-    
-    %% Styling
-    classDef customerClass fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef awsClass fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef aiClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    classDef backendClass fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-    classDef dataClass fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    %% Enhanced styling with AWS colors
+    classDef customerClass fill:#E8F4FD,stroke:#1976D2,stroke-width:3px,color:#000
+    classDef awsClass fill:#FF9900,stroke:#FF9900,stroke-width:3px,color:#fff,font-weight:bold
+    classDef aiClass fill:#9C27B0,stroke:#9C27B0,stroke-width:3px,color:#fff,font-weight:bold
+    classDef backendClass fill:#4CAF50,stroke:#4CAF50,stroke-width:3px,color:#fff,font-weight:bold
     
     class A,B,C customerClass
     class D,E awsClass
     class F,G aiClass
-    class H,I,J,K backendClass
-    class L,M,N,O,P dataClass`;
+    class H,I,J,K backendClass`;
 
   const diagramToRender = architectureDiagram || defaultDiagram;
 
@@ -115,15 +101,22 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
           }
         }, 10000); // 10 second timeout for complex diagram
         
-        // Initialize Mermaid with configuration optimized for architecture diagrams
+        // Initialize Mermaid with configuration optimized for large architecture diagrams
         mermaid.initialize({
           startOnLoad: false,
           theme: 'default',
           securityLevel: 'loose',
           flowchart: {
-            useMaxWidth: true,
+            useMaxWidth: false,
             htmlLabels: true,
-            curve: 'basis'
+            curve: 'basis',
+            nodeSpacing: 80,
+            rankSpacing: 100,
+            padding: 20
+          },
+          themeVariables: {
+            fontSize: '16px',
+            fontFamily: 'Arial, sans-serif'
           }
         });
 
@@ -198,6 +191,69 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
     // The useEffect will handle the re-rendering
   };
 
+  const handleUseStaticDiagram = () => {
+    setUseStaticDiagram(true);
+    setIsLoading(false);
+    setDiagramError(null);
+  };
+
+  // If using static diagram, render it directly
+  if (useStaticDiagram) {
+    console.log('Rendering static diagram');
+    return (
+      <div className="slide technical-architecture-slide">
+        <div className="technical-architecture-content">
+          <div className="slide-header">
+            <h1 className="slide-title">AWS Technical Architecture</h1>
+            <p className="slide-subtitle">
+              Scalable AI-Powered Contact Center Solution
+            </p>
+          </div>
+
+          <div className="diagram-container">
+            <div className="static-diagram-container">
+              <AWSArchitectureDiagram />
+            </div>
+          </div>
+
+          <div className="architecture-highlights">
+            <div className="highlight-item">
+              <div className="highlight-icon">☁️</div>
+              <div className="highlight-content">
+                <h3>Cloud-Native Architecture</h3>
+                <p>Built on AWS managed services for scalability and reliability</p>
+              </div>
+            </div>
+            
+            <div className="highlight-item">
+              <div className="highlight-icon">🧠</div>
+              <div className="highlight-content">
+                <h3>AI-Powered Intelligence</h3>
+                <p>Bedrock agents and knowledge bases for intelligent processing</p>
+              </div>
+            </div>
+            
+            <div className="highlight-item">
+              <div className="highlight-icon">🔗</div>
+              <div className="highlight-content">
+                <h3>Multi-System Integration</h3>
+                <p>Seamless connection to existing CMMS and field service platforms</p>
+              </div>
+            </div>
+            
+            <div className="highlight-item">
+              <div className="highlight-icon">📞</div>
+              <div className="highlight-content">
+                <h3>Omnichannel Support</h3>
+                <p>Voice, chat, and web channels through Amazon Connect</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="slide technical-architecture-slide">
       <div className="technical-architecture-content">
@@ -221,13 +277,22 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
               <div className="error-icon">⚠️</div>
               <h3>Architecture Diagram Error</h3>
               <p className="error-message">{diagramError}</p>
-              <button 
-                className="retry-button" 
-                onClick={handleRetryRender}
-                type="button"
-              >
-                Retry Rendering
-              </button>
+              <div className="error-buttons">
+                <button 
+                  className="retry-button" 
+                  onClick={handleRetryRender}
+                  type="button"
+                >
+                  Retry Rendering
+                </button>
+                <button 
+                  className="static-button" 
+                  onClick={handleUseStaticDiagram}
+                  type="button"
+                >
+                  Use Static Diagram
+                </button>
+              </div>
               <div className="fallback-content">
                 <h4>Architecture Components:</h4>
                 <div className="architecture-layers">

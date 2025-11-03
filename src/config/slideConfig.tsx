@@ -2,6 +2,7 @@ import React, { ComponentType } from 'react';
 import { OpeningSlide } from '../components/OpeningSlide.tsx';
 import { BusinessProcessSlide } from '../components/BusinessProcessSlide.tsx';
 import { TechnicalArchitectureSlide } from '../components/TechnicalArchitectureSlide.tsx';
+import { ImplementationPlanSlide } from '../components/ImplementationPlanSlide.tsx';
 
 interface SlideConfig {
   id: number;
@@ -21,12 +22,7 @@ interface PresentationConfig {
 
 // TechnicalArchitectureSlide is now imported from components
 
-const ImplementationPlanSlide = () => (
-  <div className="slide implementation-plan-slide">
-    <h2>Implementation Timeline</h2>
-    <p>Mermaid Gantt chart will be implemented here</p>
-  </div>
-);
+// ImplementationPlanSlide is now imported from components
 
 const CostEstimateSlide = () => (
   <div className="slide cost-estimate-slide">

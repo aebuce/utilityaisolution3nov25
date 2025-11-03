@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title-text { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #232F3E; }
+      .service-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: white; }
+      .desc-text { font-family: Arial, sans-serif; font-size: 11px; fill: white; }
+      .customer-box { fill: #E8F4FD; stroke: #1976D2; stroke-width: 2; }
+      .aws-box { fill: #FF9900; stroke: #FF9900; stroke-width: 2; }
+      .ai-box { fill: #9C27B0; stroke: #9C27B0; stroke-width: 2; }
+      .backend-box { fill: #4CAF50; stroke: #4CAF50; stroke-width: 2; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .cluster-box { fill: none; stroke: #ddd; stroke-width: 2; stroke-dasharray: 5,5; }
+      .cluster-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #666; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title-text">AWS Facility Management Architecture</text>
+  
+  <!-- Customer Channels Cluster -->
+  <rect x="50" y="80" width="280" height="150" class="cluster-box"/>
+  <text x="60" y="100" class="cluster-title">Customer Channels</text>
+  
+  <!-- Phone/PSTN -->
+  <rect x="70" y="120" width="80" height="60" class="customer-box" rx="5"/>
+  <text x="110" y="140" text-anchor="middle" class="service-text" fill="#1976D2">📞 Phone</text>
+  <text x="110" y="155" text-anchor="middle" class="desc-text" fill="#1976D2">PSTN</text>
+  
+  <!-- Web Chat -->
+  <rect x="160" y="120" width="80" height="60" class="customer-box" rx="5"/>
+  <text x="200" y="140" text-anchor="middle" class="service-text" fill="#1976D2">💬 Chat</text>
+  <text x="200" y="155" text-anchor="middle" class="desc-text" fill="#1976D2">Web</text>
+  
+  <!-- Web Voice -->
+  <rect x="250" y="120" width="80" height="60" class="customer-box" rx="5"/>
+  <text x="290" y="140" text-anchor="middle" class="service-text" fill="#1976D2">🎤 Voice</text>
+  <text x="290" y="155" text-anchor="middle" class="desc-text" fill="#1976D2">WebRTC</text>
+  
+  <!-- AWS Contact Center Cluster -->
+  <rect x="400" y="80" width="350" height="150" class="cluster-box"/>
+  <text x="410" y="100" class="cluster-title">AWS Contact Center Services</text>
+  
+  <!-- Amazon Connect -->
+  <rect x="420" y="120" width="140" height="60" class="aws-box" rx="5"/>
+  <text x="490" y="140" text-anchor="middle" class="service-text">Amazon Connect</text>
+  <text x="490" y="155" text-anchor="middle" class="desc-text">Contact Center</text>
+  
+  <!-- Amazon Lex -->
+  <rect x="580" y="120" width="140" height="60" class="aws-box" rx="5"/>
+  <text x="650" y="140" text-anchor="middle" class="service-text">Amazon Lex</text>
+  <text x="650" y="155" text-anchor="middle" class="desc-text">Conversational AI</text>
+  
+  <!-- AWS AI Services Cluster -->
+  <rect x="400" y="280" width="350" height="150" class="cluster-box"/>
+  <text x="410" y="300" class="cluster-title">AWS AI & ML Services</text>
+  
+  <!-- Bedrock Knowledge Base -->
+  <rect x="420" y="320" width="140" height="60" class="ai-box" rx="5"/>
+  <text x="490" y="340" text-anchor="middle" class="service-text">Bedrock KB</text>
+  <text x="490" y="355" text-anchor="middle" class="desc-text">Knowledge Base</text>
+  
+  <!-- Bedrock Agents -->
+  <rect x="580" y="320" width="140" height="60" class="ai-box" rx="5"/>
+  <text x="650" y="340" text-anchor="middle" class="service-text">Bedrock Agents</text>
+  <text x="650" y="355" text-anchor="middle" class="desc-text">Work Order AI</text>
+  
+  <!-- Backend Integration Cluster -->
+  <rect x="850" y="80" width="300" height="350" class="cluster-box"/>
+  <text x="860" y="100" class="cluster-title">Backend Integration Layer</text>
+  
+  <!-- ServiceNow -->
+  <rect x="870" y="120" width="120" height="60" class="backend-box" rx="5"/>
+  <text x="930" y="140" text-anchor="middle" class="service-text">ServiceNow</text>
+  <text x="930" y="155" text-anchor="middle" class="desc-text">CMMS</text>
+  
+  <!-- Maximo -->
+  <rect x="1010" y="120" width="120" height="60" class="backend-box" rx="5"/>
+  <text x="1070" y="140" text-anchor="middle" class="service-text">IBM Maximo</text>
+  <text x="1070" y="155" text-anchor="middle" class="desc-text">Asset Mgmt</text>
+  
+  <!-- FieldAware -->
+  <rect x="870" y="220" width="120" height="60" class="backend-box" rx="5"/>
+  <text x="930" y="240" text-anchor="middle" class="service-text">FieldAware</text>
+  <text x="930" y="255" text-anchor="middle" class="desc-text">Dispatch</text>
+  
+  <!-- Partner APIs -->
+  <rect x="1010" y="220" width="120" height="60" class="backend-box" rx="5"/>
+  <text x="1070" y="240" text-anchor="middle" class="service-text">Partner APIs</text>
+  <text x="1070" y="255" text-anchor="middle" class="desc-text">Contractors</text>
+  
+  <!-- Arrows -->
+  <!-- Customer to Connect -->
+  <line x1="150" y1="150" x2="420" y2="150" class="arrow"/>
+  <line x1="240" y1="150" x2="420" y2="150" class="arrow"/>
+  <line x1="330" y1="150" x2="420" y2="150" class="arrow"/>
+  
+  <!-- Connect to Lex -->
+  <line x1="560" y1="150" x2="580" y2="150" class="arrow"/>
+  
+  <!-- Lex to Bedrock Services -->
+  <line x1="620" y1="180" x2="490" y2="320" class="arrow"/>
+  <line x1="680" y1="180" x2="650" y2="320" class="arrow"/>
+  
+  <!-- Bedrock to Backend -->
+  <line x1="720" y1="340" x2="870" y2="150" class="arrow"/>
+  <line x1="720" y1="360" x2="1010" y2="150" class="arrow"/>
+  
+  <!-- Backend to Field Services -->
+  <line x1="930" y1="180" x2="930" y2="220" class="arrow"/>
+  <line x1="1070" y1="180" x2="930" y2="220" class="arrow"/>
+  
+  <!-- Field to Partners -->
+  <line x1="990" y1="250" x2="1010" y2="250" class="arrow"/>
+  
+  <!-- Status Updates (return flow) -->
+  <line x1="1010" y1="270" x2="870" y2="270" class="arrow"/>
+  <line x1="870" y1="280" x2="490" y2="380" class="arrow"/>
+  
+  <!-- Flow Labels -->
+  <text x="285" y="140" class="desc-text" fill="#666">Voice/Chat</text>
+  <text x="570" y="140" class="desc-text" fill="#666">Route</text>
+  <text x="550" y="250" class="desc-text" fill="#666">Process</text>
+  <text x="780" y="200" class="desc-text" fill="#666">Create Orders</text>
+  <text x="950" y="200" class="desc-text" fill="#666">Dispatch</text>
+  <text x="1000" y="240" class="desc-text" fill="#666">Assign</text>
+  <text x="940" y="290" class="desc-text" fill="#666">Status Updates</text>
+  
+  <!-- Key Benefits -->
+  <rect x="50" y="500" width="1100" height="250" fill="white" stroke="#ddd" stroke-width="1" rx="10"/>
+  <text x="70" y="530" class="cluster-title">Key Architecture Benefits</text>
+  
+  <!-- Benefit 1 -->
+  <rect x="80" y="550" width="250" height="80" fill="#E8F4FD" stroke="#1976D2" stroke-width="1" rx="5"/>
+  <text x="90" y="570" class="service-text" fill="#1976D2">☁️ Cloud-Native</text>
+  <text x="90" y="590" class="desc-text" fill="#1976D2">Built on AWS managed services</text>
+  <text x="90" y="605" class="desc-text" fill="#1976D2">for scalability and reliability</text>
+  
+  <!-- Benefit 2 -->
+  <rect x="350" y="550" width="250" height="80" fill="#F3E5F5" stroke="#9C27B0" stroke-width="1" rx="5"/>
+  <text x="360" y="570" class="service-text" fill="#9C27B0">🧠 AI-Powered</text>
+  <text x="360" y="590" class="desc-text" fill="#9C27B0">Bedrock agents and knowledge</text>
+  <text x="360" y="605" class="desc-text" fill="#9C27B0">bases for intelligent processing</text>
+  
+  <!-- Benefit 3 -->
+  <rect x="620" y="550" width="250" height="80" fill="#E8F5E8" stroke="#4CAF50" stroke-width="1" rx="5"/>
+  <text x="630" y="570" class="service-text" fill="#4CAF50">🔗 Multi-System</text>
+  <text x="630" y="590" class="desc-text" fill="#4CAF50">Seamless connection to existing</text>
+  <text x="630" y="605" class="desc-text" fill="#4CAF50">CMMS and field service platforms</text>
+  
+  <!-- Benefit 4 -->
+  <rect x="890" y="550" width="250" height="80" fill="#FFF3E0" stroke="#FF9900" stroke-width="1" rx="5"/>
+  <text x="900" y="570" class="service-text" fill="#FF9900">📞 Omnichannel</text>
+  <text x="900" y="590" class="desc-text" fill="#FF9900">Voice, chat, and web channels</text>
+  <text x="900" y="605" class="desc-text" fill="#FF9900">through Amazon Connect</text>
+</svg>

@@ -1,0 +1,377 @@
+/* Implementation Plan Slide Styles */
+.implementation-plan-slide {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.implementation-plan-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.slide-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.slide-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slide-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.diagram-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  padding: 0;
+  overflow: auto;
+  min-height: 500px;
+}
+
+/* Gantt Chart Specific Styles */
+.gantt-chart {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.gantt-chart svg {
+  min-width: 1200px;
+  width: 1400px;
+  height: auto;
+  min-height: 600px;
+  display: block;
+}
+
+/* Ensure proper scrolling for large Gantt charts */
+.diagram-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.diagram-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.diagram-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.diagram-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Loading State */
+.diagram-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff9900;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.diagram-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.diagram-error h3 {
+  color: #d32f2f;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.error-message {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.retry-button {
+  background: #ff9900;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 2rem;
+}
+
+.retry-button:hover {
+  background: #e68900;
+}
+
+.retry-button:active {
+  transform: translateY(1px);
+}
+
+/* Fallback Content */
+.fallback-content {
+  max-width: 800px;
+  text-align: left;
+}
+
+.fallback-content h4 {
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.timeline-phases {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.phase {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ff9900;
+}
+
+.phase h5 {
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.phase ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #666;
+}
+
+.phase li {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.timeline-summary {
+  text-align: center;
+  padding: 1rem;
+  background: #e3f2fd;
+  border-radius: 8px;
+  color: #1976d2;
+  font-size: 1.1rem;
+}
+
+/* Implementation Highlights */
+.implementation-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.highlight-content h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.highlight-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Key Milestones */
+.key-milestones {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.key-milestones h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  color: #333;
+  text-align: center;
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.milestone {
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ff9900 0%, #ffb74d 100%);
+  border-radius: 8px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.milestone:hover {
+  transform: scale(1.05);
+}
+
+.milestone-date {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .implementation-plan-slide {
+    padding: 1.5rem;
+  }
+  
+  .slide-title {
+    font-size: 2rem;
+  }
+  
+  .implementation-highlights {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .implementation-plan-slide {
+    padding: 1rem;
+  }
+  
+  .slide-title {
+    font-size: 1.8rem;
+  }
+  
+  .slide-subtitle {
+    font-size: 1rem;
+  }
+  
+  .implementation-highlights {
+    grid-template-columns: 1fr;
+  }
+  
+  .milestones-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .highlight-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .highlight-icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-title {
+    font-size: 1.5rem;
+  }
+  
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .timeline-phases {
+    gap: 0.5rem;
+  }
+  
+  .phase {
+    padding: 0.75rem;
+  }
+}

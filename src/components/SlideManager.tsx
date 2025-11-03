@@ -32,6 +32,19 @@ export function SlideManager({ slides, className = '' }: SlideManagerProps) {
     );
   }
 
+  // Determine animation classes based on transition state and direction
+  const getAnimationClasses = () => {
+    if (!slideState.isTransitioning) return '';
+    
+    const direction = slideState.direction;
+    if (direction === 'next') {
+      return 'slide-enter will-animate gpu-accelerated';
+    } else if (direction === 'prev') {
+      return 'slide-enter-reverse will-animate gpu-accelerated';
+    }
+    return '';
+  };
+
   // Render the current slide component
   const SlideComponent = currentSlideConfig.component;
   
@@ -39,17 +52,19 @@ export function SlideManager({ slides, className = '' }: SlideManagerProps) {
     <div className={`slide-manager ${className}`}>
       <VirtualHighlighter className="slide-highlighter-overlay">
         <div 
-          className={`slide-container ${slideState.isTransitioning ? 'transitioning' : ''}`}
+          className={`slide-container slide-transition-container ${getAnimationClasses()}`}
           data-slide-id={slideState.currentSlide}
           data-slide-title={currentSlideConfig.title}
           data-direction={slideState.direction}
         >
-          <SlideComponent {...(currentSlideConfig.props || {})} />
+          <div className="content-animate-in">
+            <SlideComponent {...(currentSlideConfig.props || {})} />
+          </div>
         </div>
       </VirtualHighlighter>
       
-      {/* Slide indicator */}
-      <div className="slide-indicator">
+      {/* Slide indicator with animation */}
+      <div className={`slide-indicator ${slideState.isTransitioning ? 'nav-indicator-update' : ''}`}>
         <span className="current-slide">{slideState.currentSlide}</span>
         <span className="slide-separator"> / </span>
         <span className="total-slides">{slideState.totalSlides}</span>

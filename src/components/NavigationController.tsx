@@ -61,7 +61,7 @@ export function NavigationController({ className = '' }: NavigationControllerPro
     <div className={`navigation-controller ${className}`}>
       {/* Visual navigation controls (optional) */}
       <button
-        className={`nav-button prev-button ${!canGoPrevious() ? 'disabled' : ''}`}
+        className={`nav-button prev-button button-hover button-press ${!canGoPrevious() ? 'disabled' : ''}`}
         onClick={handlePreviousClick}
         disabled={!canGoPrevious()}
         aria-label="Previous slide"
@@ -70,12 +70,12 @@ export function NavigationController({ className = '' }: NavigationControllerPro
         ←
       </button>
       
-      <div className="slide-progress">
+      <div className="slide-progress nav-button-enter">
         <div className="progress-dots">
           {Array.from({ length: slideState.totalSlides }, (_, index) => (
             <div
               key={index + 1}
-              className={`progress-dot ${index + 1 === slideState.currentSlide ? 'active' : ''}`}
+              className={`progress-dot ${index + 1 === slideState.currentSlide ? 'active' : ''} ${slideState.isTransitioning ? 'nav-indicator-update' : ''}`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}
@@ -83,7 +83,7 @@ export function NavigationController({ className = '' }: NavigationControllerPro
       </div>
       
       <button
-        className={`nav-button next-button ${!canGoNext() ? 'disabled' : ''}`}
+        className={`nav-button next-button button-hover button-press ${!canGoNext() ? 'disabled' : ''}`}
         onClick={handleNextClick}
         disabled={!canGoNext()}
         aria-label="Next slide"

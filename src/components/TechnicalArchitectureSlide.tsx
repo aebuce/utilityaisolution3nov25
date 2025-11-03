@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import { AWSArchitectureDiagram } from './AWSArchitectureDiagram';
+import { DiagramErrorBoundary } from './DiagramErrorBoundary';
 import '../styles/TechnicalArchitectureSlide.css';
 
 interface TechnicalArchitectureSlideProps {
@@ -210,11 +211,13 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
             </p>
           </div>
 
-          <div className="diagram-container">
-            <div className="static-diagram-container">
-              <AWSArchitectureDiagram />
+          <DiagramErrorBoundary diagramType="AWS Architecture">
+            <div className="diagram-container">
+              <div className="static-diagram-container">
+                <AWSArchitectureDiagram />
+              </div>
             </div>
-          </div>
+          </DiagramErrorBoundary>
 
           <div className="architecture-highlights">
             <div className="highlight-item">
@@ -264,83 +267,85 @@ export function TechnicalArchitectureSlide({ architectureDiagram }: TechnicalArc
           </p>
         </div>
 
-        <div className="diagram-container">
-          {isLoading && (
-            <div className="diagram-loading">
-              <div className="loading-spinner"></div>
-              <p>Loading AWS architecture diagram...</p>
-            </div>
-          )}
-
-          {diagramError && (
-            <div className="diagram-error">
-              <div className="error-icon">⚠️</div>
-              <h3>Architecture Diagram Error</h3>
-              <p className="error-message">{diagramError}</p>
-              <div className="error-buttons">
-                <button 
-                  className="retry-button" 
-                  onClick={handleRetryRender}
-                  type="button"
-                >
-                  Retry Rendering
-                </button>
-                <button 
-                  className="static-button" 
-                  onClick={handleUseStaticDiagram}
-                  type="button"
-                >
-                  Use Static Diagram
-                </button>
+        <DiagramErrorBoundary diagramType="AWS Architecture">
+          <div className="diagram-container">
+            {isLoading && (
+              <div className="diagram-loading">
+                <div className="loading-spinner"></div>
+                <p>Loading AWS architecture diagram...</p>
               </div>
-              <div className="fallback-content">
-                <h4>Architecture Components:</h4>
-                <div className="architecture-layers">
-                  <div className="layer">
-                    <h5>Customer Channels</h5>
-                    <ul>
-                      <li>Phone/PSTN calls</li>
-                      <li>Web-based chat</li>
-                      <li>Web-based voice</li>
-                    </ul>
-                  </div>
-                  <div className="layer">
-                    <h5>AWS Contact Center</h5>
-                    <ul>
-                      <li>Amazon Connect for call routing</li>
-                      <li>Amazon Lex for conversational AI</li>
-                    </ul>
-                  </div>
-                  <div className="layer">
-                    <h5>AWS AI Services</h5>
-                    <ul>
-                      <li>Bedrock Knowledge Base for FAQs</li>
-                      <li>Bedrock Agents for work order processing</li>
-                    </ul>
-                  </div>
-                  <div className="layer">
-                    <h5>Backend Integration</h5>
-                    <ul>
-                      <li>Multiple CMMS systems (ServiceNow, Maximo)</li>
-                      <li>Field service dispatch systems</li>
-                      <li>Partner and contractor APIs</li>
-                    </ul>
+            )}
+
+            {diagramError && (
+              <div className="diagram-error">
+                <div className="error-icon">⚠️</div>
+                <h3>Architecture Diagram Error</h3>
+                <p className="error-message">{diagramError}</p>
+                <div className="error-buttons">
+                  <button 
+                    className="retry-button" 
+                    onClick={handleRetryRender}
+                    type="button"
+                  >
+                    Retry Rendering
+                  </button>
+                  <button 
+                    className="static-button" 
+                    onClick={handleUseStaticDiagram}
+                    type="button"
+                  >
+                    Use Static Diagram
+                  </button>
+                </div>
+                <div className="fallback-content">
+                  <h4>Architecture Components:</h4>
+                  <div className="architecture-layers">
+                    <div className="layer">
+                      <h5>Customer Channels</h5>
+                      <ul>
+                        <li>Phone/PSTN calls</li>
+                        <li>Web-based chat</li>
+                        <li>Web-based voice</li>
+                      </ul>
+                    </div>
+                    <div className="layer">
+                      <h5>AWS Contact Center</h5>
+                      <ul>
+                        <li>Amazon Connect for call routing</li>
+                        <li>Amazon Lex for conversational AI</li>
+                      </ul>
+                    </div>
+                    <div className="layer">
+                      <h5>AWS AI Services</h5>
+                      <ul>
+                        <li>Bedrock Knowledge Base for FAQs</li>
+                        <li>Bedrock Agents for work order processing</li>
+                      </ul>
+                    </div>
+                    <div className="layer">
+                      <h5>Backend Integration</h5>
+                      <ul>
+                        <li>Multiple CMMS systems (ServiceNow, Maximo)</li>
+                        <li>Field service dispatch systems</li>
+                        <li>Partner and contractor APIs</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div 
-            ref={diagramRef} 
-            className={`mermaid-diagram ${isLoading ? 'loading' : ''} ${diagramError ? 'error' : ''}`}
-            role="img"
-            aria-label="AWS technical architecture diagram showing the complete system flow from customer channels through AWS services to backend systems"
-            style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
-          >
-            {/* Mermaid content will be inserted here */}
+            <div 
+              ref={diagramRef} 
+              className={`mermaid-diagram ${isLoading ? 'loading' : ''} ${diagramError ? 'error' : ''}`}
+              role="img"
+              aria-label="AWS technical architecture diagram showing the complete system flow from customer channels through AWS services to backend systems"
+              style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
+            >
+              {/* Mermaid content will be inserted here */}
+            </div>
           </div>
-        </div>
+        </DiagramErrorBoundary>
 
         <div className="architecture-highlights">
           <div className="highlight-item">

@@ -1,0 +1,147 @@
+.diagram-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  color: white;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.diagram-fallback__content {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.diagram-fallback__image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.diagram-fallback__text {
+  width: 100%;
+}
+
+.diagram-fallback__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.diagram-fallback__title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.diagram-fallback__message {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.diagram-fallback__placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.placeholder-box {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  min-width: 300px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.placeholder-box span {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Animation for placeholder */
+.placeholder-box {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .diagram-fallback {
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+  
+  .diagram-fallback__icon {
+    font-size: 2.5rem;
+  }
+  
+  .diagram-fallback__title {
+    font-size: 1.5rem;
+  }
+  
+  .diagram-fallback__message {
+    font-size: 1rem;
+  }
+  
+  .placeholder-box {
+    min-width: 250px;
+    min-height: 150px;
+    padding: 2rem 1.5rem;
+  }
+  
+  .placeholder-box span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .diagram-fallback {
+    padding: 1rem;
+    min-height: 250px;
+  }
+  
+  .diagram-fallback__icon {
+    font-size: 2rem;
+  }
+  
+  .diagram-fallback__title {
+    font-size: 1.3rem;
+  }
+  
+  .diagram-fallback__message {
+    font-size: 0.9rem;
+  }
+  
+  .placeholder-box {
+    min-width: 200px;
+    min-height: 120px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .placeholder-box span {
+    font-size: 0.9rem;
+  }
+}

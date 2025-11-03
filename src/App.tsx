@@ -6,20 +6,29 @@ import { SlideManager } from './components/SlideManager'
 import { NavigationController } from './components/NavigationController'
 import { HighlighterToggle } from './components/HighlighterToggle'
 import { HighlighterManager } from './components/HighlighterManager'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { slideConfigs, presentationConfig } from './config/slideConfig'
 
 function App() {
   return (
-    <SlideProvider totalSlides={presentationConfig.totalSlides}>
-      <HighlighterProvider>
-        <div className="app">
-          <SlideManager slides={slideConfigs} className="main-presentation" />
-          <NavigationController />
-          <HighlighterToggle />
-          <HighlighterManager />
-        </div>
-      </HighlighterProvider>
-    </SlideProvider>
+    <ErrorBoundary componentName="Presentation Application">
+      <SlideProvider totalSlides={presentationConfig.totalSlides}>
+        <HighlighterProvider>
+          <div className="app presentation-app">
+            <ErrorBoundary componentName="Slide Manager">
+              <SlideManager slides={slideConfigs} className="main-presentation" />
+            </ErrorBoundary>
+            <ErrorBoundary componentName="Navigation Controller">
+              <NavigationController />
+            </ErrorBoundary>
+            <ErrorBoundary componentName="Highlighter Controls">
+              <HighlighterToggle />
+              <HighlighterManager />
+            </ErrorBoundary>
+          </div>
+        </HighlighterProvider>
+      </SlideProvider>
+    </ErrorBoundary>
   )
 }
 

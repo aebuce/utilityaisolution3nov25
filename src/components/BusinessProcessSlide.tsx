@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
+import { DiagramErrorBoundary } from './DiagramErrorBoundary';
 import '../styles/BusinessProcessSlide.css';
 
 interface BusinessProcessSlideProps {
@@ -152,52 +153,54 @@ export function BusinessProcessSlide({ mermaidDiagram }: BusinessProcessSlidePro
           </p>
         </div>
 
-        <div className="diagram-container">
-          {isLoading && (
-            <div className="diagram-loading">
-              <div className="loading-spinner"></div>
-              <p>Loading business process diagram...</p>
-            </div>
-          )}
-
-          {diagramError && (
-            <div className="diagram-error">
-              <div className="error-icon">⚠️</div>
-              <h3>Diagram Rendering Error</h3>
-              <p className="error-message">{diagramError}</p>
-              <button 
-                className="retry-button" 
-                onClick={handleRetryRender}
-                type="button"
-              >
-                Retry Rendering
-              </button>
-              <div className="fallback-content">
-                <h4>Process Overview:</h4>
-                <ol className="process-steps">
-                  <li>Customer calls facility management hotline</li>
-                  <li>Amazon Connect routes call to AI system</li>
-                  <li>Amazon Lex processes natural language request</li>
-                  <li>Bedrock Agent or Knowledge Base handles intent</li>
-                  <li>CMMS system creates and manages work order</li>
-                  <li>Field service dispatch coordinates response</li>
-                  <li>Partner notification and status updates</li>
-                  <li>Work order completion and customer notification</li>
-                </ol>
+        <DiagramErrorBoundary diagramType="Business Process">
+          <div className="diagram-container diagram-container-responsive">
+            {isLoading && (
+              <div className="diagram-loading loading-fade-in">
+                <div className="loading-spinner"></div>
+                <p>Loading business process diagram...</p>
               </div>
-            </div>
-          )}
+            )}
 
-          <div 
-            ref={diagramRef} 
-            className={`mermaid-diagram ${isLoading ? 'loading' : ''} ${diagramError ? 'error' : ''}`}
-            role="img"
-            aria-label="Business process flow diagram showing the complete work order management lifecycle from customer call to completion"
-            style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
-          >
-            {/* Mermaid content will be inserted here */}
+            {diagramError && (
+              <div className="diagram-error loading-fade-in">
+                <div className="error-icon">⚠️</div>
+                <h3>Diagram Rendering Error</h3>
+                <p className="error-message">{diagramError}</p>
+                <button 
+                  className="retry-button button-hover button-press" 
+                  onClick={handleRetryRender}
+                  type="button"
+                >
+                  Retry Rendering
+                </button>
+                <div className="fallback-content content-animate-in-delayed">
+                  <h4>Process Overview:</h4>
+                  <ol className="process-steps stagger-children">
+                    <li>Customer calls facility management hotline</li>
+                    <li>Amazon Connect routes call to AI system</li>
+                    <li>Amazon Lex processes natural language request</li>
+                    <li>Bedrock Agent or Knowledge Base handles intent</li>
+                    <li>CMMS system creates and manages work order</li>
+                    <li>Field service dispatch coordinates response</li>
+                    <li>Partner notification and status updates</li>
+                    <li>Work order completion and customer notification</li>
+                  </ol>
+                </div>
+              </div>
+            )}
+
+            <div 
+              ref={diagramRef} 
+              className={`mermaid-diagram ${isLoading ? 'loading' : 'diagram-loaded'} ${diagramError ? 'error' : ''}`}
+              role="img"
+              aria-label="Business process flow diagram showing the complete work order management lifecycle from customer call to completion"
+              style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
+            >
+              {/* Mermaid content will be inserted here */}
+            </div>
           </div>
-        </div>
+        </DiagramErrorBoundary>
 
         <div className="process-highlights">
           <div className="highlight-item">

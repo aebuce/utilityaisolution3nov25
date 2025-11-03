@@ -328,29 +328,29 @@ export const CostVisualizationCharts: React.FC<CostVisualizationChartsProps> = (
         <p>Interactive charts showing cost trends and breakdowns over {timelineMonths} months</p>
       </div>
 
-      <div className="charts-grid">
-        <div className="chart-container">
-          <div className="chart-wrapper">
+      <div className="charts-grid stagger-children">
+        <div className="chart-container chart-container-responsive">
+          <div className="chart-wrapper chart-loaded">
             <Line data={monthlyCostData} options={lineChartOptions} />
           </div>
         </div>
 
-        <div className="chart-container">
-          <div className="chart-wrapper">
+        <div className="chart-container chart-container-responsive">
+          <div className="chart-wrapper chart-loaded">
             <Line data={cumulativeCostData} options={cumulativeChartOptions} />
           </div>
         </div>
 
-        <div className="chart-container full-width">
-          <div className="chart-wrapper">
+        <div className="chart-container chart-container-responsive full-width">
+          <div className="chart-wrapper chart-loaded">
             <Bar data={yearlyBreakdownData} options={barChartOptions} />
           </div>
         </div>
       </div>
 
-      <div className="chart-insights">
+      <div className="chart-insights content-animate-in-delayed">
         <h5>Key Insights</h5>
-        <div className="insights-grid">
+        <div className="insights-grid stagger-children">
           <div className="insight-card">
             <h6>Growth Pattern</h6>
             <p>Monthly costs increase by ~2% due to call volume growth and seasonal variations</p>

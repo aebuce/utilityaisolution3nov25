@@ -110,11 +110,13 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({
         <h4>Monthly Cost Breakdown</h4>
         
         {isCalculating ? (
-          <div className="calculating-indicator">
-            <span>Calculating...</span>
+          <div className="calculating-indicator loading-fade-in">
+            <div className="loading-pulse">
+              <span>Calculating...</span>
+            </div>
           </div>
         ) : (
-          <div className="cost-breakdown">
+          <div className="cost-breakdown stagger-children">
             <div className="service-cost">
               <div className="service-header">
                 <h5>Amazon Connect</h5>

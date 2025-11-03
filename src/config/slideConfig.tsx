@@ -59,17 +59,11 @@ export const slideConfigs: SlideConfig[] = [
   },
   {
     id: 5,
-    title: 'Cost Estimate',
+    title: 'Cost Estimate & Closing',
     component: CostEstimateSlide,
     props: {
       initialCallVolume: 1000,
-    },
-  },
-  {
-    id: 6,
-    title: 'Thank You',
-    component: ClosingSlide,
-    props: {
+      showClosingHighlights: true,
       highlights: [
         'AI-powered conversational interface reduces manual work order processing by 80%',
         'Seamless integration with existing CMMS systems and field service platforms',
@@ -87,5 +81,5 @@ export const slideConfigs: SlideConfig[] = [
 // Complete presentation configuration
 export const presentationConfig: PresentationConfig = {
   slides: slideConfigs,
-  totalSlides: slideConfigs.length, // Now 6 slides total
+  totalSlides: slideConfigs.length, // Exactly 5 slides as per requirements
 };

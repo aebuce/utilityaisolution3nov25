@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
+import { DiagramErrorBoundary } from './DiagramErrorBoundary';
 import '../styles/ImplementationPlanSlide.css';
 
 interface ImplementationPlanSlideProps {
@@ -186,88 +187,90 @@ export function ImplementationPlanSlide({ ganttChart }: ImplementationPlanSlideP
           </p>
         </div>
 
-        <div className="diagram-container">
-          {isLoading && (
-            <div className="diagram-loading">
-              <div className="loading-spinner"></div>
-              <p>Loading implementation timeline...</p>
-            </div>
-          )}
+        <DiagramErrorBoundary diagramType="Implementation Timeline">
+          <div className="diagram-container">
+            {isLoading && (
+              <div className="diagram-loading">
+                <div className="loading-spinner"></div>
+                <p>Loading implementation timeline...</p>
+              </div>
+            )}
 
-          {diagramError && (
-            <div className="diagram-error">
-              <div className="error-icon">⚠️</div>
-              <h3>Timeline Rendering Error</h3>
-              <p className="error-message">{diagramError}</p>
-              <button 
-                className="retry-button" 
-                onClick={handleRetryRender}
-                type="button"
-              >
-                Retry Rendering
-              </button>
-              <div className="fallback-content">
-                <h4>Implementation Phases:</h4>
-                <div className="timeline-phases">
-                  <div className="phase">
-                    <h5>Phase 1: Foundation (3 weeks)</h5>
-                    <ul>
-                      <li>Project kickoff and planning</li>
-                      <li>AWS account setup and security review</li>
-                      <li>Network and VPC configuration</li>
-                    </ul>
+            {diagramError && (
+              <div className="diagram-error">
+                <div className="error-icon">⚠️</div>
+                <h3>Timeline Rendering Error</h3>
+                <p className="error-message">{diagramError}</p>
+                <button 
+                  className="retry-button" 
+                  onClick={handleRetryRender}
+                  type="button"
+                >
+                  Retry Rendering
+                </button>
+                <div className="fallback-content">
+                  <h4>Implementation Phases:</h4>
+                  <div className="timeline-phases">
+                    <div className="phase">
+                      <h5>Phase 1: Foundation (3 weeks)</h5>
+                      <ul>
+                        <li>Project kickoff and planning</li>
+                        <li>AWS account setup and security review</li>
+                        <li>Network and VPC configuration</li>
+                      </ul>
+                    </div>
+                    <div className="phase">
+                      <h5>Phase 2: Core Services (7 weeks)</h5>
+                      <ul>
+                        <li>Amazon Connect contact center setup</li>
+                        <li>Amazon Lex conversational AI development</li>
+                        <li>Bedrock knowledge base and agents</li>
+                      </ul>
+                    </div>
+                    <div className="phase">
+                      <h5>Phase 3: Integration (6 weeks)</h5>
+                      <ul>
+                        <li>CMMS system integration</li>
+                        <li>Field service API connections</li>
+                        <li>Partner system integrations</li>
+                        <li>Data migration and synchronization</li>
+                      </ul>
+                    </div>
+                    <div className="phase">
+                      <h5>Phase 4: Testing (6 weeks)</h5>
+                      <ul>
+                        <li>Unit and integration testing</li>
+                        <li>User acceptance testing</li>
+                        <li>Performance and security testing</li>
+                      </ul>
+                    </div>
+                    <div className="phase">
+                      <h5>Phase 5: Deployment (4 weeks)</h5>
+                      <ul>
+                        <li>Staging environment deployment</li>
+                        <li>Production go-live</li>
+                        <li>Post-launch optimization</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div className="phase">
-                    <h5>Phase 2: Core Services (7 weeks)</h5>
-                    <ul>
-                      <li>Amazon Connect contact center setup</li>
-                      <li>Amazon Lex conversational AI development</li>
-                      <li>Bedrock knowledge base and agents</li>
-                    </ul>
+                  <div className="timeline-summary">
+                    <strong>Total Duration: ~26 weeks (6 months)</strong>
                   </div>
-                  <div className="phase">
-                    <h5>Phase 3: Integration (6 weeks)</h5>
-                    <ul>
-                      <li>CMMS system integration</li>
-                      <li>Field service API connections</li>
-                      <li>Partner system integrations</li>
-                      <li>Data migration and synchronization</li>
-                    </ul>
-                  </div>
-                  <div className="phase">
-                    <h5>Phase 4: Testing (6 weeks)</h5>
-                    <ul>
-                      <li>Unit and integration testing</li>
-                      <li>User acceptance testing</li>
-                      <li>Performance and security testing</li>
-                    </ul>
-                  </div>
-                  <div className="phase">
-                    <h5>Phase 5: Deployment (4 weeks)</h5>
-                    <ul>
-                      <li>Staging environment deployment</li>
-                      <li>Production go-live</li>
-                      <li>Post-launch optimization</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="timeline-summary">
-                  <strong>Total Duration: ~26 weeks (6 months)</strong>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div 
-            ref={diagramRef} 
-            className={`mermaid-diagram gantt-chart ${isLoading ? 'loading' : ''} ${diagramError ? 'error' : ''}`}
-            role="img"
-            aria-label="Implementation timeline Gantt chart showing project phases, milestones, and realistic deployment schedule for enterprise facility management solution"
-            style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
-          >
-            {/* Mermaid Gantt chart content will be inserted here */}
+            <div 
+              ref={diagramRef} 
+              className={`mermaid-diagram gantt-chart ${isLoading ? 'loading' : ''} ${diagramError ? 'error' : ''}`}
+              role="img"
+              aria-label="Implementation timeline Gantt chart showing project phases, milestones, and realistic deployment schedule for enterprise facility management solution"
+              style={{ display: (!isLoading && !diagramError) ? 'block' : 'none' }}
+            >
+              {/* Mermaid Gantt chart content will be inserted here */}
+            </div>
           </div>
-        </div>
+        </DiagramErrorBoundary>
 
         <div className="implementation-highlights">
           <div className="highlight-item">

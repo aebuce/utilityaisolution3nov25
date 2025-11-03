@@ -3,6 +3,7 @@ import { OpeningSlide } from '../components/OpeningSlide.tsx';
 import { BusinessProcessSlide } from '../components/BusinessProcessSlide.tsx';
 import { TechnicalArchitectureSlide } from '../components/TechnicalArchitectureSlide.tsx';
 import { ImplementationPlanSlide } from '../components/ImplementationPlanSlide.tsx';
+import { CostEstimateSlide } from '../components/CostEstimateSlide.tsx';
 import { ClosingSlide } from '../components/ClosingSlide.tsx';
 
 interface SlideConfig {
@@ -25,12 +26,7 @@ interface PresentationConfig {
 
 // ImplementationPlanSlide is now imported from components
 
-const CostEstimateSlide = () => (
-  <div className="slide cost-estimate-slide">
-    <h2>Cost Calculator</h2>
-    <p>Interactive cost calculator will be implemented here</p>
-  </div>
-);
+// CostEstimateSlide is now imported from components
 
 // ClosingSlide is now imported from components
 
@@ -65,6 +61,9 @@ export const slideConfigs: SlideConfig[] = [
     id: 5,
     title: 'Cost Estimate',
     component: CostEstimateSlide,
+    props: {
+      initialCallVolume: 1000,
+    },
   },
   {
     id: 6,

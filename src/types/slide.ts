@@ -1,7 +1,9 @@
+import type { ComponentType } from 'react';
+
 export interface SlideConfig {
   id: number;
   title: string;
-  component: React.ComponentType<any>;
+  component: ComponentType<any>;
   props?: Record<string, any>;
 }
 
@@ -14,6 +16,7 @@ export interface SlideState {
   currentSlide: number;
   totalSlides: number;
   isTransitioning: boolean;
+  direction: 'next' | 'prev' | null;
 }
 
 export interface SlideContextType {

@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/App.css'
 import { SlideProvider } from './contexts/SlideContext'
 import { SlideManager } from './components/SlideManager'
+import { NavigationController } from './components/NavigationController'
 import { slideConfigs, presentationConfig } from './config/slideConfig'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <SlideProvider totalSlides={presentationConfig.totalSlides}>
       <div className="app">
         <SlideManager slides={slideConfigs} className="main-presentation" />
+        <NavigationController />
       </div>
     </SlideProvider>
   )

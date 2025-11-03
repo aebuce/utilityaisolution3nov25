@@ -1,5 +1,21 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
-import { SlideState, SlideContextType } from '../types/slide';
+import React, { createContext, useContext, useReducer } from 'react';
+import type { ReactNode } from 'react';
+
+interface SlideState {
+  currentSlide: number;
+  totalSlides: number;
+  isTransitioning: boolean;
+  direction: 'next' | 'prev' | null;
+}
+
+interface SlideContextType {
+  slideState: SlideState;
+  goToSlide: (slideNumber: number) => void;
+  nextSlide: () => void;
+  previousSlide: () => void;
+  canGoNext: () => boolean;
+  canGoPrevious: () => boolean;
+}
 
 // Action types for slide state management
 type SlideAction =
@@ -7,6 +23,7 @@ type SlideAction =
   | { type: 'NEXT_SLIDE' }
   | { type: 'PREVIOUS_SLIDE' }
   | { type: 'SET_TRANSITIONING'; payload: boolean }
+  | { type: 'SET_DIRECTION'; payload: 'next' | 'prev' | null }
   | { type: 'INITIALIZE'; payload: { totalSlides: number } };
 
 // Initial state
@@ -14,6 +31,7 @@ const initialState: SlideState = {
   currentSlide: 1,
   totalSlides: 5, // As per requirements: exactly 5 slides
   isTransitioning: false,
+  direction: null,
 };
 
 // Reducer function for slide state management
@@ -44,6 +62,8 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       return {
         ...state,
         currentSlide: state.currentSlide + 1,
+        direction: 'next',
+        isTransitioning: true,
       };
     
     case 'PREVIOUS_SLIDE':
@@ -54,12 +74,20 @@ function slideReducer(state: SlideState, action: SlideAction): SlideState {
       return {
         ...state,
         currentSlide: state.currentSlide - 1,
+        direction: 'prev',
+        isTransitioning: true,
       };
     
     case 'SET_TRANSITIONING':
       return {
         ...state,
         isTransitioning: action.payload,
+      };
+    
+    case 'SET_DIRECTION':
+      return {
+        ...state,
+        direction: action.payload,
       };
     
     default:
@@ -91,11 +119,25 @@ export function SlideProvider({ children, totalSlides = 5 }: SlideProviderProps)
     },
     
     nextSlide: () => {
-      dispatch({ type: 'NEXT_SLIDE' });
+      if (slideState.currentSlide < slideState.totalSlides) {
+        dispatch({ type: 'NEXT_SLIDE' });
+        // Clear transition state after animation
+        setTimeout(() => {
+          dispatch({ type: 'SET_TRANSITIONING', payload: false });
+          dispatch({ type: 'SET_DIRECTION', payload: null });
+        }, 400); // Match CSS animation duration
+      }
     },
     
     previousSlide: () => {
-      dispatch({ type: 'PREVIOUS_SLIDE' });
+      if (slideState.currentSlide > 1) {
+        dispatch({ type: 'PREVIOUS_SLIDE' });
+        // Clear transition state after animation
+        setTimeout(() => {
+          dispatch({ type: 'SET_TRANSITIONING', payload: false });
+          dispatch({ type: 'SET_DIRECTION', payload: null });
+        }, 400); // Match CSS animation duration
+      }
     },
     
     canGoNext: () => {

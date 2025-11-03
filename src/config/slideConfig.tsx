@@ -1,14 +1,19 @@
-import React from 'react';
-import { SlideConfig, PresentationConfig } from '../types/slide';
+import React, { ComponentType } from 'react';
+import { OpeningSlide } from '../components/OpeningSlide.tsx';
+
+interface SlideConfig {
+  id: number;
+  title: string;
+  component: ComponentType<any>;
+  props?: Record<string, any>;
+}
+
+interface PresentationConfig {
+  slides: SlideConfig[];
+  totalSlides: number;
+}
 
 // Placeholder slide components (will be implemented in later tasks)
-const OpeningSlide = ({ title, presenter, date }: { title: string; presenter: string; date: string }) => (
-  <div className="slide opening-slide">
-    <h1>{title}</h1>
-    <p>Presenter: {presenter}</p>
-    <p>Date: {date}</p>
-  </div>
-);
 
 const BusinessProcessSlide = () => (
   <div className="slide business-process-slide">

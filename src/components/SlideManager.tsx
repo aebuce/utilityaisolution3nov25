@@ -1,6 +1,12 @@
-import React from 'react';
-import { useSlideContext } from '../contexts/SlideContext';
-import { SlideConfig } from '../types/slide';
+import React, { ComponentType } from 'react';
+import { useSlideContext } from '../contexts/SlideContext.tsx';
+
+interface SlideConfig {
+  id: number;
+  title: string;
+  component: ComponentType<any>;
+  props?: Record<string, any>;
+}
 import '../styles/SlideManager.css';
 
 interface SlideManagerProps {
@@ -34,6 +40,7 @@ export function SlideManager({ slides, className = '' }: SlideManagerProps) {
         className={`slide-container ${slideState.isTransitioning ? 'transitioning' : ''}`}
         data-slide-id={slideState.currentSlide}
         data-slide-title={currentSlideConfig.title}
+        data-direction={slideState.direction}
       >
         <SlideComponent {...(currentSlideConfig.props || {})} />
       </div>
